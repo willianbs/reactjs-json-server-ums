@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Container, Row, Col, Card, CardHeader, CardBody,
+  Container, Row, Col, Card, CardHeader, CardBody, Button,
 } from 'shards-react';
 
 import api from '../../services/api';
@@ -50,7 +50,15 @@ const Main = () => {
               <Col>
                 <Card small className="mb-4">
                   <CardHeader className="border-bottom">
-                    <h6 className="m-0">Users list</h6>
+                    <h6 className="m-0">
+                      Users list
+                      {' '}
+                      <Button size="md" theme="info" className="mb-2 mr-1 float-right">
+                        <i className="material-icons">add_circle</i>
+                        {' '}
+New user
+                      </Button>
+                    </h6>
                   </CardHeader>
                   <CardBody className="p-0 pb-3">
                     <table className="table mb-0">
@@ -76,13 +84,32 @@ const Main = () => {
                       </thead>
                       <tbody>
                         {dataUsers.map(user => (
-                          <tr>
+                          <tr key={user.id}>
                             <td>{user.id}</td>
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
                             <td>{user.email}</td>
                             <td>{user.id}</td>
-                            <td>EDIT | DEL</td>
+                            <td>
+                              {/* <Button
+                                size="sm"
+                                outline
+                                theme="info"
+                                onClick={() => this.handleUserDeleteClick(user.id)}
+                                className="mb-2 mr-1 float-right"
+                              >
+                                <i className="material-icons">edit</i>
+                              </Button> */}
+                              <Button
+                                size="sm"
+                                outline
+                                theme="danger"
+                                onClick={() => this.handleUserDeleteClick(user.id)}
+                                className="mb-2 mr-1 float-right"
+                              >
+                                <i className="material-icons">delete_forever</i>
+                              </Button>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -97,7 +124,15 @@ const Main = () => {
               <Col>
                 <Card small className="mb-4">
                   <CardHeader className="border-bottom">
-                    <h6 className="m-0">Groups list</h6>
+                    <h6 className="m-0">
+                      Groups list
+                      {' '}
+                      <Button size="md" theme="info" className="mb-2 mr-1 float-right">
+                        <i className="material-icons">add_circle</i>
+                        {' '}
+New group
+                      </Button>
+                    </h6>
                   </CardHeader>
                   <CardBody className="p-0 pb-3">
                     <table className="table mb-0">
@@ -117,11 +152,30 @@ const Main = () => {
                       </thead>
                       <tbody>
                         {dataGroups.map(group => (
-                          <tr>
+                          <tr key={group.id}>
                             <td>{group.id}</td>
                             <td>{group.name}</td>
                             <td>{group.id}</td>
-                            <td>EDIT | DEL</td>
+                            <td className="align-right">
+                              {/* <Button
+                                size="sm"
+                                outline
+                                theme="info"
+                                onClick={() => this.handleGroupEditClick(group.id)}
+                                className="mb-2 mr-1 float-right"
+                              >
+                                <i className="material-icons">edit</i>
+                              </Button> */}
+                              <Button
+                                size="sm"
+                                outline
+                                theme="danger"
+                                onClick={() => this.handleGroupDeleteClick(group.id)}
+                                className="mb-2 mr-1 float-right"
+                              >
+                                <i className="material-icons">delete_forever</i>
+                              </Button>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
