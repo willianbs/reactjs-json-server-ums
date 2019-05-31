@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Container,
-  Nav,
   Navbar,
   Form,
   InputGroup,
@@ -21,14 +20,9 @@ const NavBar = () => (
                 <i className="material-icons">search</i>
               </InputGroupText>
             </InputGroupAddon>
-            <FormInput className="navbar-search" placeholder="Search for something..." />
+            <FormInput className="navbar-search" placeholder="[W.I.P] Search for something..." />
           </InputGroup>
         </Form>
-        <Nav navbar className="border-left flex-row">
-          Hello,
-          {' '}
-          <strong>Admin</strong>
-        </Nav>
         <nav className="nav">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a

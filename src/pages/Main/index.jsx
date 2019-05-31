@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container, Row, Col, Card, CardHeader, CardBody,
 } from 'shards-react';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 import Sidebar from '../../components/layout/Sidebar';
 import NavBar from '../../components/layout/NavBar';
 
 const Main = () => {
-  const teste = 'baattat';
+  const [dataUsers, setData] = useState([]);
+  const [dataGroups, setGroupsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await api.get('users/');
+      setData(result.data);
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await api.get('groups/');
+      setGroupsData(result.data);
+    };
+    fetchData();
+  }, []);
+
+  // console.log(userData);
   return (
     <Container fluid>
       <Row>
@@ -24,6 +42,10 @@ const Main = () => {
           <NavBar />
           {/* Users */}
           <Container fluid className="main-content-container px-4">
+            {/* Page Header */}
+            <Row noGutters className="page-header py-4">
+              <h3>Welcome to our dashboard</h3>
+            </Row>
             <Row>
               <Col>
                 <Card small className="mb-4">
@@ -53,14 +75,16 @@ const Main = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Ali</td>
-                          <td>Kerry</td>
-                          <td>Russian Federation</td>
-                          <td>Gdańsk</td>
-                          <td>EDIT | DEL</td>
-                        </tr>
+                        {dataUsers.map(user => (
+                          <tr>
+                            <td>{user.id}</td>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.email}</td>
+                            <td>{user.id}</td>
+                            <td>EDIT | DEL</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </CardBody>
@@ -92,12 +116,14 @@ const Main = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Ali</td>
-                          <td>Ali</td>
-                          <td>EDIT | DEL</td>
-                        </tr>
+                        {dataGroups.map(group => (
+                          <tr>
+                            <td>{group.id}</td>
+                            <td>{group.name}</td>
+                            <td>{group.id}</td>
+                            <td>EDIT | DEL</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </CardBody>
