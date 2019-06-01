@@ -2,15 +2,20 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Main from './pages/Main';
+import Users from './pages/Users';
+import UserDetail from './pages/Users/Detail';
+// import Groups from './pages/Users';
+// import GroupDetail from './pages/Groups/Detail';
 
 const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={Main} />
-      {/* <Route path="/groups/" component={Groups} />
+
       <Route path="/users/" component={Users} />
-      <Route path="/groups/:id" component={Groups} />
-      <Route path="/users/:id" component={Users} /> */}
+      <Route path="/user/:id" component={UserDetail} />
+      {/* <Route path="/groups/" component={Groups} />
+      <Route path="/group/:id" component={GroupDetail} /> */}
     </Switch>
   </BrowserRouter>
 );
