@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ToastsContainer, ToastsStore, ToastsContainerPosition } from 'react-toasts';
 import {
   Container, Row, Col, Card, CardHeader, CardBody, Button,
 } from 'shards-react';
@@ -17,8 +18,6 @@ const Users = () => {
     };
     fetchData();
   }, []);
-
-  // console.log(userData);
   return (
     <Container fluid>
       <Row>
@@ -44,7 +43,12 @@ const Users = () => {
                     <h6 className="m-0">
                       Users list
                       {' '}
-                      <Button size="md" theme="info" className="mb-2 mr-1 float-right">
+                      <Button
+                        size="md"
+                        theme="info"
+                        href="user/new"
+                        className="mb-2 mr-1 float-right"
+                      >
                         <i className="material-icons">add_circle</i>
                         {' '}
 New user
@@ -67,9 +71,6 @@ New user
                           <th scope="col" className="border-0">
                             Email
                           </th>
-                          <th scope="col" className="border-0">
-                            Groups
-                          </th>
                           <th scope="col" className="border-0" />
                         </tr>
                       </thead>
@@ -84,17 +85,7 @@ New user
                               <a href={`user/${user.id}`}>{user.lastName}</a>
                             </td>
                             <td>{user.email}</td>
-                            <td>{user.id}</td>
                             <td>
-                              {/* <Button
-                                size="sm"
-                                outline
-                                theme="info"
-                                onClick={() => this.handleUserDeleteClick(user.id)}
-                                className="mb-2 mr-1 float-right"
-                              >
-                                <i className="material-icons">edit</i>
-                              </Button> */}
                               <Button
                                 size="sm"
                                 outline
@@ -103,11 +94,21 @@ New user
                                 onClick={async () => {
                                   await api.delete(`users/${user.id}`);
                                   const arrayCopy = dataUsers.filter(row => row.id !== user.id);
+                                  ToastsStore.info('User removed!');
                                   setData(arrayCopy);
                                 }}
                                 className="mb-2 mr-1 float-right"
                               >
                                 <i className="material-icons">delete_forever</i>
+                              </Button>
+                              <Button
+                                size="sm"
+                                outline
+                                theme="info"
+                                href={`user/${user.id}/edit`}
+                                className="mb-2 mr-1 float-right"
+                              >
+                                <i className="material-icons">edit</i>
                               </Button>
                             </td>
                           </tr>
@@ -121,6 +122,7 @@ New user
           </Container>
         </Col>
       </Row>
+      <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.TOP_RIGHT} />
     </Container>
   );
 };

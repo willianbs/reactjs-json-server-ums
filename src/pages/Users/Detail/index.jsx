@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import {
   Container, Row, Col, Card, CardHeader, Button,
@@ -9,14 +10,22 @@ import Sidebar from '../../../components/layout/Sidebar';
 import NavBar from '../../../components/layout/NavBar';
 
 const UserDetail = (props) => {
+  const {
+    match: { params },
+  } = props;
   const [dataUser, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const {
-        match: { params },
-      } = props;
       const result = await api.get(`users/${params.id}?_embed=groupusers`);
       setData(result.data);
+    };
+    fetchData();
+  }, []);
+  const [groups, setDataGroup] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await api.get(`groupusers/?userId=${params.id}&_expand=group`);
+      setDataGroup(result.data);
     };
     fetchData();
   }, []);
@@ -57,24 +66,17 @@ const UserDetail = (props) => {
                       {dataUser.lastName}
                     </h4>
                     <h6 className="mb-0">{dataUser.email}</h6>
-                    <p className="mb-0">Groups: [todo]</p>
-                    {/* <span className="text-muted d-block mb-2">
-                      {Object.keys(dataUser.groupusers).map(group => (
-                        <Button
-                          key={group.id}
-                          pill
-                          theme="danger"
-                          outline
-                          size="md"
-                          className="mb-2"
-                        >
-                          <i className="material-icons mr-1">delete</i>
+                    <p className="mb-0">Groups: </p>
+                    <br />
+                    <span className="text-muted d-block mb-2">
+                      {groups.map(group => (
+                        <Button key={group.id} pill theme="info" outline size="md" className="mb-2">
+                          <i className="material-icons mr-1">group</i>
                           {' '}
-GroupId:
-                          {group.groupId}
+                          {group.group.name}
                         </Button>
                       ))}
-                    </span> */}
+                    </span>
                   </CardHeader>
                 </Card>
                 <Button
