@@ -20,7 +20,7 @@ const NavBar = () => (
                 <i className="material-icons">search</i>
               </InputGroupText>
             </InputGroupAddon>
-            <FormInput className="navbar-search" placeholder="[W.I.P] Search for something..." />
+            <FormInput className="navbar-search" placeholder="Search for something..." />
           </InputGroup>
         </Form>
         <nav className="nav">

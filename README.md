@@ -1,6 +1,6 @@
 # About
 
-I've used **ReactJs** with some libraries for front-end and created a **fake server** to mock an API.
+I've used **ReactJs** with some libraries for front-end and created a **[fake server](<[https://github.com/typicode/json-server](https://github.com/typicode/json-server)>)** to mock an API.
 
 _Instructions follows:_
 
